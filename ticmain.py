@@ -15,6 +15,7 @@ def main():
     # take inputs in turns
     print(LOGO)
     player_1 = True
+    counter = 0
     while True:
         show_board(board_text)
         if player_1:
@@ -28,17 +29,20 @@ def main():
         # the command to clear is `cls` on Windows and `clear` on most everything else
         os.system('cls' if os.name == 'nt' else 'clear')
         print(LOGO)
+        counter += 1
+
         # calculate if won
         winner = board_text.is_there_winner()
-        if winner:
+        if winner or counter >= 9:
             break
+
 
     # end game if won and print winner name
     show_board(board_text)
-    print(f"Player {winner} has won!")
-
-
-
+    if winner:
+        print(f"Player {winner} has won!")
+    else:
+        print("Its a draw!")
 
 
 # create a class to store max of 9 inputs
